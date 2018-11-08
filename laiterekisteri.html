@@ -95,9 +95,15 @@
                         $("#sposti").val("");
                         $("#puhnro").val("");
 
-
-
                     }
+
+                    $.ajax({
+                        type: "POST",
+                        url: "yhteydet.php",
+                        data: { name: "John" }
+                    }).done(function (msg) {
+                        alert("Data Saved: " + msg);
+                    });    
 
                 });
 
