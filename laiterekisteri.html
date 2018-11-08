@@ -53,12 +53,7 @@
                         $("#sposti").val("");
                         $("#puhnro").val("");
 
-                        if ($('#poxi').prop('checked')) {
-                            $("#lopputulos").text(nimi + " " + salasana + " " + oppilaitos + " " + ika);
-                        }
-                        else {
-                            $("#lopputulos").text(nimi + " " + salasana);
-                        }
+                        
 
                     }
 
@@ -115,7 +110,7 @@
 
     </div>
     <input type="button" id="rekisteroidy" value="Rekisteröidy" />
-    <p id="lopputulos"> </p>
+    
 
 
     <div id="dialog" title="Rekisteröityminen">
@@ -130,7 +125,7 @@
                 <input type="password" name="salasana" id="salasana" value="" class="text ui-widget-content ui-corner-all">
 
 
-                <br />
+                
 
                 <label id="nimimerkkierror" value=""></label>
                 <br />
