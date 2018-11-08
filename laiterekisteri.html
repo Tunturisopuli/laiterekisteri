@@ -104,17 +104,18 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-4">
-                <label for="kayttaja</b>/label>
-                <p><input type="text" /></p>
-                <p>Salasana</p>
-                <p><input type="text" /></p>
+                <label for="kayttaja">Käyttäjätunnus</label>
+                <input type="text" id="kayttaja" />
+                <label for="salasana">Salasana</label>
+                <input type="text" name="salasana" required>
+                <br/>
                 <input type="submit" name="login" value="Kirjaudu" />
-                <input class="buttonRekisterointi" type="button" value="Rekisteröidy" />
+                <input type="button" id="rekisteroidy" value="Rekisteröidy" />
             </div>
         </div>
 
     </div>
-    <input type="button" id="rekisteroidy" value="Rekisteröidy" />
+    
     <p id="lopputulos"> </p>
 
 
