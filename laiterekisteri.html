@@ -13,7 +13,49 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 
-    <script>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        form {
+            border: 3px solid #f1f1f1;
+        }
+
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+                opacity: 0.8;
+        }
+
+
+        .container {
+            padding: 16px;
+        }
+
+
+
+
+    </style>
+
+        <script >
 
         $(document).ready(function () {
 
@@ -53,7 +95,7 @@
                         $("#sposti").val("");
                         $("#puhnro").val("");
 
-                        
+
 
                     }
 
@@ -91,68 +133,74 @@
         });
 
 
-    </script>
+        </script >
 
-</head>
-<body>
+        </head >
+        <body >
 
-    <div class="container">
-        <div class="row">
+            
+
+        <div class="container" >
+        <div class="row" >
             <div class="col-sm-4">
-                <label for="kayttaja">Käyttäjätunnus</label>
-                <input type="text" id="kayttaja" />
-                <label for="salasana">Salasana</label>
+
+                <h2>Laiterekisteri</h2>
+
+                <br />
+                <label for="kayttaja"> Käyttäjätunnus</label>
+                <input type="text" id="kayttaja">
+                <label for="salasana"> Salasana</label>
                 <input type="text" name="salasana" required>
-                <br/>
-                <input type="submit" name="login" value="Kirjaudu" />
-                <input type="button" id="rekisteroidy" value="Rekisteröidy" />
+
+                <button type="submit" name="login">Kirjaudu</button>
+                <button type="button" id="rekisteroidy">Rekisteröidy</button>
             </div>
-        </div>
+        </div >
 
-    </div>
-
-
-    <div id="dialog" title="Rekisteröityminen">
-        <form>
-            <fieldset>
-                <label for="nimi">Käyttäjätunnus: </label>
-                <br />
-                <input type="text" name="nimi" id="nimi" value="" class="text ui-widget-content ui-corner-all">
-                <br />
-                <label for="salasana">Salasana: </label>
-                <br />
-                <input type="password" name="salasana" id="salasana" value="" class="text ui-widget-content ui-corner-all">
+        </div >
 
 
-                
+        <div id="dialog" title="Rekisteröityminen" >
+        <form >
+        <fieldset >
+        <label for="nimi" > Käyttäjätunnus: </label >
 
-                <label id="nimimerkkierror" value=""></label>
-                <br />
-                <label id="salasanaerror" value=""></label>
+        <input type="text" name="nimi" id="nimi" value="" class="text ui-widget-content ui-corner-all" >
 
+        <label for="salasana" > Salasana: </label >
 
-                <div id="kayttajatiedot">
-                    <br />
-                    <label for="sposti">Sähköposti: </label>
-                    <br />
-                    <input id="sposti" type="text" />
-                    <br />
-                    <label for="puhnro">Puhelinnumero: </label>
-                    <br />
-                    <input id="puhnro" type="text" class="text ui-widget-content ui-corner-all" />
+        <input type="password" name="salasana" id="salasana" value="" class="text ui-widget-content ui-corner-all" >
 
 
 
-                </div>
-                <br />
-                <br />
-                <input type="button" id="tallenna" Value="Tallenna" />
 
-                <input type="button" id="peruuta" value="Peruuta" />
-                <br />
-                <br />
-            </fieldset>
-        </form>
-    </div>
-</body>
-</html>
+        <label id="nimimerkkierror" value="" > </label >
+
+        <label id="salasanaerror" value="" > </label >
+
+
+        <div id="kayttajatiedot" >
+
+        <label for="sposti" > Sähköposti: </label >
+
+        <input id="sposti" type="text">
+
+        <label for="puhnro" > Puhelinnumero: </label >
+ 
+        <input id="puhnro" type="text" class="text ui-widget-content ui-corner-all">
+
+
+
+        </div >
+
+
+        <input type="button" id="tallenna" Value="Tallenna">
+
+        <input type="button" id="peruuta" value="Peruuta">
+  
+
+        </fieldset >
+        </form >
+        </div >
+        </body >
+        </html >
