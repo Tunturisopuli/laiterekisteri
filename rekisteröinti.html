@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
+    <script>
+
+        $(document).ready(function () {
+            var spinneri = $("#ika").spinner();
+
+
+            $("#rekisteroidy").click(function () {
+                $("#dialog").dialog("open");
+
+                $("#oppilaitos").prop("disabled", true);
+                $("#ika").prop("disabled", true);
+                spinneri.spinner("disable");
+
+                $("#tallenna").click(function () {
+
+                    var nimi = $("#nimi").val();
+                    var salasana = $("#salasana").val();
+                    var oppilaitos = $("#oppilaitos").val();
+                    var ika = $("#ika").val();
+                    if (nimi.length < 5) {
+
+                        $("#nimi").css("background", "red");
+                        $("#nimimerkkierror").text("Nimimerkki väärä!");
+                    }
+                    if (salasana.length < 5) {
+                        $("#salasana").css("background", "red");
+                        $("#salasanaerror").text("Salasana väärä!");
+                    }
+
+                    else {
+                        $("#dialog").dialog("close");
+                        alert("Rekisteröinti onnistui!");
+                        $("#salasana").css("background", "white");
+                        $("#nimi").css("background", "white");
+                       // buttonin saa poistettua: $("#rekisteroidy").remove();
+
+                        $("#salasana").val("");
+                        $("#nimi").val("");
+                        $("#ika").val("");
+                        $("#oppilaitos").val("");
+
+                        if ($('#poxi').prop('checked')) {
+                            $("#lopputulos").text(nimi+ " "+ salasana+ " " + oppilaitos + " " + ika);
+                        }
+                        else {
+                            $("#lopputulos").text(nimi + " " + salasana);
+                        }
+
+                    }
+
+                });
+
+                $('#poxi').click(function () {
+
+                    if ($('#poxi').prop('checked')) {
+                        $("#ika").prop("disabled", false);
+                        $("#oppilaitos").prop("disabled", false);
+                        spinneri.spinner("enable");
+                    }
+                    else {
+                        $("#oppilaitos").prop("disabled", true);
+                        $("#ika").prop("disabled", true);
+                        spinneri.spinner("disable");
+                    }
+
+                });
+
+
+
+
+                $("#peruuta").click(function () {
+                    $("#dialog").dialog("close");
+                });
+
+            });
+
+
+        });
+        $(function () {
+            $("#dialog").dialog();
+            $("#dialog").dialog("close");
+        });
+
+
+    </script>
+
+</head>
+<body>
+    <input type="button" id="rekisteroidy" value="Rekisteröidy" />
+    <p id="lopputulos"> </p>
+
+
+    <div id="dialog" title="Rekisteröityminen">
+        <form>
+            <fieldset>
+                <label for="nimi">Nimi: </label>
+                <input type="text" name="nimi" id="nimi" value="" class="text ui-widget-content ui-corner-all">
+                <label for="salasana">Salasana: </label>
+                <input type="password" name="salasana" id="salasana" value="" class="text ui-widget-content ui-corner-all">
+                <input type="button" id="tallenna" Value="Tallenna" />
+
+                <input type="button" id="peruuta" value="Peruuta" />
+                <br />
+                <br />
+                <label for="poxi">Lisätiedot: </label>
+                <input type="checkbox" id="poxi" name="poxi" />
+                <br>
+
+                <label id="nimimerkkierror" value=""></label>
+                <br />
+                <label id="salasanaerror" value=""></label>
+
+
+                <div id="lisatiedot">
+                    <label for="ika">Ikäsi: </label>
+                    <input id="ika" type="text" />
+                    <label for="oppilaitos">Oppilaitos: </label>
+                    <input id="oppilaitos" type="text" class="text ui-widget-content ui-corner-all" />
+
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</body>
+</html>
