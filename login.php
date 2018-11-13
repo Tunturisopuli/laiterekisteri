@@ -161,6 +161,8 @@
                 <h2>Laiterekisteri</h2>
 
                 <br />
+
+                <form action="" method="post">
                 <label for="kayttaja"> Käyttäjätunnus</label>
                 <input type="text" id="kayttaja">
                 <label for="salasana"> Salasana</label>
@@ -168,6 +170,7 @@
 
                 <button type="submit" name="login">Kirjaudu</button>
                 <button type="button" id="rekisteroidy">Rekisteröidy</button>
+                </form>
             </div>
         </div>
 
