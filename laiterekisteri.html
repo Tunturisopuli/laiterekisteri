@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿    <?php
+    // Include config file
+    require_once "config.php";
+    ?>
+
+
+<!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -41,21 +47,22 @@
             width: 100%;
         }
 
-        button:hover {
+            button:hover {
                 opacity: 0.8;
-        }
+            }
 
 
         .container {
             padding: 16px;
         }
-
-
-
-
     </style>
 
-        <script >
+
+
+    <script>
+
+
+
 
         $(document).ready(function () {
 
@@ -103,7 +110,7 @@
                         data: { name: "John" }
                     }).done(function (msg) {
                         alert("Data Saved: " + msg);
-                    });    
+                    });
 
                 });
 
@@ -139,15 +146,15 @@
         });
 
 
-        </script >
+    </script>
 
-        </head >
-        <body >
+</head>
+<body>
 
-            
 
-        <div class="container" >
-        <div class="row" >
+
+    <div class="container">
+        <div class="row">
             <div class="col-sm-4">
 
                 <h2>Laiterekisteri</h2>
@@ -161,12 +168,12 @@
                 <button type="submit" name="login">Kirjaudu</button>
                 <button type="button" id="rekisteroidy">Rekisteröidy</button>
             </div>
-        </div >
+        </div>
 
-        </div >
+    </div>
 
 
-        <div id="dialog" title="Rekisteröityminen" >
+    <div id="dialog" title="Rekisteröityminen">
         <form>
             <fieldset>
                 <label for="nimi"> Käyttäjätunnus: </label>
@@ -214,7 +221,7 @@
 
 
             </fieldset>
-        </form >
-        </div >
-        </body >
-        </html >
+        </form>
+    </div>
+</body>
+</html>
