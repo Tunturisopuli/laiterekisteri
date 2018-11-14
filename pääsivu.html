@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Laiterekisteri</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
+    <style>
+        .buttonTarkista {
+            background-color: dodgerblue;
+            color: white;
+            border-radius: 4px;
+            border: none;
+        }
+        .Lohko1{
+           
+            font-size:xx-large;
+            font-style:italic;
+            text-align:center;
+            background-color:lightblue;
+        }
+        .Lohko2 {
+            font-size:large;
+            font-style: italic;
+            text-align: right;
+            
+        }
+        table#mytable td {
+            border: none !important;
+        }
+    
+        
+    </style>
+</head>
+<body>
+    <nav class="Lohko1">
+
+        <p>Laiterekisteri</p>
+        
+
+    </nav>
+    <nav class="Lohko2">
+
+        
+        <input type="button" id="kayttaja" value="Käyttäjätili" />
+        <input type="button" id="ulos" value="Kirjaudu ulos" />
+
+    </nav>
+    <br /><br />
+
+          <div class="container">
+
+              <form action="/action_page.php" id="rekisteri"></form>
+              <p>Kategoria</p>
+              <select name="kategoriat" form="rekisteri">
+
+                  <option value="Puhelimet">Puhelimet</option>
+                  <option value="Pöytäkoneet">Pöytäkoneet</option>
+                  <option value="Läppärit">Läppärit</option>
+                  <option value="Tabletit">Tabletit</option>
+              </select>
+              <br />
+              <br />
+
+              <p>Merkki</p>
+              <select name="merkkit" form="rekisteri">
+
+                  <option value="Nokia">Nokia</option>
+                  <option value="Samsung">Samsung</option>
+                  <option value="Sony">Sony</option>
+                  <option value="Asus">Asus</option>
+              </select>
+
+              
+              <br />
+              <br />
+              <input type="button" value="Hae" id="hae" />
+
+          </div>
+
+</body>
+</html>
