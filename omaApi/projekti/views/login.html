@@ -1,0 +1,67 @@
+﻿
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Laiterekisteri</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="/views/css/styles.css">
+
+    <script>
+        $(document).ready(function () {
+
+            $('#register').click(function () {
+
+                window.location = "http://localhost:3003/register";
+
+            });
+
+            $('#login').click(function () {
+
+                window.location = "http://localhost:3003/etusivu";
+
+            });
+
+
+        });
+
+        
+
+
+    </script>
+
+</head>
+<body>
+
+	<form method="post" action="login.html">
+    <div class="input-group">
+        <div class="row">
+            <div class="col-sm-4">
+
+                <h2>Laiterekisteri</h2>
+
+                <br />
+
+                <label for="kayttaja"> Käyttäjätunnus</label>
+                <input type="text" id="kayttaja">
+                <label for="salasana"> Salasana</label>
+                <input type="text" name="salasana" required>
+
+                <button type="button" name="login"id="login">Kirjaudu</button>
+                <button type="button" id="register">Rekisteröidy</button>
+
+            </div>
+        </div>
+    </div>
+	  	
+	</form>
+    
+</body>
+</html>
