@@ -4,9 +4,17 @@
     <title>Laiterekisteri</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
 
 
 
@@ -17,71 +25,185 @@
             border-radius: 4px;
             border: none;
         }
-        .Lohko1{
-           
-            font-size:xx-large;
-            font-style:italic;
-            text-align:center;
-            background-color:lightblue;
-        }
+
         .Lohko2 {
-            font-size:large;
-            font-style: italic;
+            font-size: large;
             text-align: right;
-            
         }
+
         table#mytable td {
             border: none !important;
         }
-    
-        
     </style>
 </head>
-<body>
-    <nav class="Lohko1">
+<body class="w3-content" style="max-width:1200px">
 
-        <p>Laiterekisteri</p>
-        
+
+    <nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar">
+        <div class="w3-container w3-display-container w3-padding-16">
+            <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
+            <h3 class="w3-wide"><b>LAITEREKISTERI</b></h3>
+        </div>
+
+        <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
+            <a href="#" class="w3-bar-item w3-button">Shirts</a>
+            <a onclick="tabletit()" class="w3-button w3-block w3-white w3-left-align" id="myBtn">
+                Tabletit <i class="fa fa-caret-down"></i>
+            </a>
+            <div id="tabletit_div" class="w3-bar-block w3-hide w3-padding-large w3-medium">
+                <a href="#" class="w3-bar-item w3-button">Skinny</a>
+                <a href="#" class="w3-bar-item w3-button">Relaxed</a>
+                <a href="#" class="w3-bar-item w3-button">Bootcut</a>
+                <a href="#" class="w3-bar-item w3-button">Straight</a>
+            </div>
+            <a href="#" class="w3-bar-item w3-button">PERSEKOLO</a>
+            <a href="#" class="w3-bar-item w3-button">Läppärit</a>
+            <a href="#" class="w3-bar-item w3-button">Puhelimet</a>
+        </div>
+
+
 
     </nav>
+
+
+
+
     <nav class="Lohko2">
 
-        
         <input type="button" id="kayttaja" value="Käyttäjätili" />
         <input type="button" id="ulos" value="Kirjaudu ulos" />
 
+        <div>
+            <input type="text" id="hae" placeholder="Hae...." />
+            <button>Search</button>
+        </div>
+
     </nav>
-    <br /><br />
 
-          <div class="container">
 
-              <form action="/action_page.php" id="rekisteri"></form>
-              <p>Kategoria</p>
-              <select name="kategoriat" form="rekisteri">
+        <div>
+            <table id="taulu" name="taulu" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>
+                            ID
+                        </th>
+                        <th>
+                            Tyyppi
+                        </th>
+                        <th>
+                            Merkki
+                        </th>
+                        <th>
+                            Malli
+                        </th>
+                        <th>
+                            Omistaja
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
 
-                  <option value="Puhelimet">Puhelimet</option>
-                  <option value="Pöytäkoneet">Pöytäkoneet</option>
-                  <option value="Läppärit">Läppärit</option>
-                  <option value="Tabletit">Tabletit</option>
-              </select>
-              <br />
-              <br />
 
-              <p>Merkki</p>
-              <select name="merkkit" form="rekisteri">
 
-                  <option value="Nokia">Nokia</option>
-                  <option value="Samsung">Samsung</option>
-                  <option value="Sony">Sony</option>
-                  <option value="Asus">Asus</option>
-              </select>
+    <script type="text/javascript" language="javascript">
 
-              
-              <br />
-              <br />
-              <input type="button" value="Hae" id="hae" />
+            HaeData();
 
-          </div>
+            var data;
+
+
+        function HaeData() {
+
+
+            $.ajax({
+                url: "http://localhost:3003/haeLaitteet",
+                method: 'GET',
+                "dataType": "json"
+            }).done(function (data, textStatus, jqXHR) {
+
+                editor = $('#taulu').DataTable({
+
+                    "data": data,
+                    "columns": [
+                        { "data": "laite_id" },
+                        { "data": "tyyppi_id" },
+                        { "data": "merkki" },
+                        { "data": "malli" },
+                        { "data": "omistaja" },
+                    ],
+
+                    "language": {
+                        "sEmptyTable": "Ei näytettäviä tuloksia.",
+                        "sInfo": "Näytetään rivit _START_ - _END_ (yhteensä _TOTAL_ )",
+                        "sInfoEmpty": "Näytetään 0 - 0 (yhteensä 0)",
+                        "sInfoFiltered": "(suodatettu _MAX_ tuloksen joukosta)",
+                        "sInfoPostFix": "",
+                        "sInfoThousands": ",",
+                        "sLengthMenu": "Näytä kerralla _MENU_ riviä",
+                        "sLoadingRecords": "Ladataan...",
+                        "sProcessing": "Hetkinen...",
+                        "sSearch": "Etsi:",
+                        "sZeroRecords": "Tietoja ei löytynyt",
+                        "oPaginate": {
+                            "sFirst": "Ensimmäinen",
+                            "sLast": "Viimeinen",
+                            "sNext": "Seuraava",
+                            "sPrevious": "Edellinen"
+                        },
+                        "oAria": {
+                            "sSortAscending": ": A-Z",
+                            "sSortDescending": ": Z-A"
+                        },
+                        "select": {
+                            "rows": {
+                                "_": "Valittuna %d riviä",
+                                "0": "Klikkaa riviä valitaksesi sen",
+                                "1": "Valittuna vain yksi rivi"
+                            }
+                        },
+                        "buttons": {
+                            "copy": "Kopioi",
+                            "copySuccess": {
+                                "1": "Yksi rivi kopioitu leikepöydälle",
+                                "_": "%d riviä kopioitu leikepöydälle"
+                            },
+                            "copyTitle": "Kopioi leikepöydälle",
+                            "copyKeys": "Paina <i>ctrl</i> tai <i>\u2318</i> + <i>C</i> kopioidaksesi taulukon arvot<br> leikepöydälle. <br><br>Peruuttaaksesi klikkaa tähän tai Esc."
+                        },
+                    }
+                });
+
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                console.log("Kutsu epäonnistui");
+
+            }).always(function (jqXHR, textStatus, errorThrown) {
+                console.log("meow");
+            });
+        }
+
+
+
+
+        // Accordion
+        function tabletit() {
+            var x = document.getElementById("tabletit_div");
+            if (x.className.indexOf("w3-show") == -1) {
+                x.className += " w3-show";
+            } else {
+                x.className = x.className.replace(" w3-show", "");
+            }
+        }
+        // Click on the "Jeans" link on page load to open the accordion for demo purposes
+        document.getElementById("myBtn").click();
+
+
+    </script>
+
+
+
+
 
 </body>
 </html>
