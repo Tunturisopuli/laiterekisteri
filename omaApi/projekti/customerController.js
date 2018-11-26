@@ -22,7 +22,7 @@ module.exports =
     {
         return new Promise((resolve, reject) => {
 
-          connection.query('SELECT Avain, Lyhenne, Selite FROM Asiakastyyppi', function(error, results, fields){
+          connection.query('SELECT * kayttaja', function(error, results, fields){
             if ( error ){
               console.log("Virhe haettaessa dataa Asiakas-taulusta, syy: " + error);
               reject("Virhe haettaessa dataa Asiakas-taulusta, syy: " + error);
@@ -56,6 +56,24 @@ module.exports =
           }
       });
     },
+
+    checkUser: function (tunnus) {
+        return new Promise((resolve, reject) => {
+
+            connection.query('SELECT * FROM kayttaja WHERE tunnus =?', [tunnus], function (error, results, fields) {
+                if (error) {
+                    console.log("Virhe haettaessa käyttäjätunnusta taulusta, syy: " + error);
+                    reject("Virhe haettaessa dataa Asiakas-taulusta, syy: " + error);
+                }
+                else {
+                    console.log("Data (rev) = " + JSON.stringify(results));
+                    resolve(results);
+                }
+            })
+        })
+    },
+
+    
 
     delete : function (req, res) {
       console.log("body: " + JSON.stringify(req.body));

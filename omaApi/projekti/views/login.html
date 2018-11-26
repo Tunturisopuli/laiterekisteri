@@ -25,9 +25,69 @@
 
             $('#login').click(function () {
 
-                window.location = "http://localhost:3003/etusivu";
+                var tunnus = $('#tunnus').val();
+                var salasana = $('#salasana').val();
+                
+
+
+                $.ajax(
+                    {
+                        url: "http://localhost:3003/checkUser?checkUser=" + tunnus,
+                        method: 'GET',  
+                        "dataType": "JSON"
+                    }).done(function (data, textStatus, jqXHR) {
+
+                        // Suoritetaan kun kutsu on valmis
+                        console.log("OK");
+                        //window.location = "http://localhost:3003/etusivu";
+
+                        if (typeof data[0] != 'undefined') {
+
+                            var tunnus = data[0]['tunnus']
+                            var salasana = data[0]['salasana']
+
+
+                            if (tunnus == tunnus && salasana == salasana) {
+
+                                console.log("kirjautuminen onnistui");
+                                window.location = "http://localhost:3003/etusivu";
+
+
+                            }
+
+                            if (tunnus == tunnus && salasana !== salasana) {
+
+                                console.log("kirjautuminen epäonnistui, salasana ei täsmää");
+                                window.location = "http://localhost:3003";
+
+
+                            }
+                        }
+                        else {
+
+                            console.log("Nyt ei kyllä skulaa");
+                            window.location = "http://localhost:3003";
+                        }
+
+
+
+                    }).fail(function (jqXHR, textStatus, errorThrown) {
+                        // Suoriteaan, jos kutsu epäonnistuu
+                        console.log("Kutsu epäonnistui asdasadasasd");
+
+                    }).always(function (jqXHR, textStatus, errorThrown) {
+                        // suoritetaan aina (riippumatta onnistuiko kutsu vai ei)
+                        // HUOM! 1. parametri sisältää datan jos kutsu onnistui ja 3. parametri jqXHR-olion. Jos kutsu epäonnistui, 1. parametri on jqXHR-olio ja 3. errorThrown
+                        console.log("Kutsu always");
+
+                    });
+
 
             });
+
+
+
+           
 
 
         });
@@ -50,11 +110,11 @@
                 <br />
 
                 <label for="kayttaja"> Käyttäjätunnus</label>
-                <input type="text" id="kayttaja">
+                <input type="text" id="tunnus">
                 <label for="salasana"> Salasana</label>
-                <input type="text" name="salasana" required>
+                <input type="text" id="salasana">
 
-                <button type="button" name="login"id="login">Kirjaudu</button>
+                <button type="button" id="login">Kirjaudu</button>
                 <button type="button" id="register">Rekisteröidy</button>
 
             </div>

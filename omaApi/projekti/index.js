@@ -17,12 +17,41 @@ app.set('view engine', 'html');
 app.set('views', path.join(__dirname, 'views'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-
 app.use(express.static('./'));
+
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 app.route('/createUser')
     .post(customerController.createUser);
+
+app.get('/checkUser', function (req, res) {
+
+    var tunnus = req.param('checkUser');
+
+    customerController.checkUser(tunnus).then(function (data) {
+        console.log(JSON.stringify(data));
+        return data;
+    })
+        .then((types) => {
+            return types;
+        })
+        .catch(function (msg) {
+            console.log("Virhettä pukkaa " + msg);
+        })
+        .then((types) => {
+            // suoritetaan vaikka tulis virhe
+            if (types == null) types = [{ tunnus: null, salasana: null}];
+            res.send(types);
+            
+        });
+
+
+});
+    
 
 app.get('/', function(req, res) {
   res.render('login', {
