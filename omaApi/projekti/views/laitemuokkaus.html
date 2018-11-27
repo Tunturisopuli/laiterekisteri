@@ -31,23 +31,23 @@
 
             $('#tallenna').click(function () {
 
-                var tunnus = $('#tunnus').val();
-                var salasana = $('#salasana').val();
-                var nimi = $('#nimi').val();
-                var puhnro = $('#puhnro').val();
-                var osoite = $('#osoite').val();
+                var merkki = $('#merkki').val();
+                var tyyppi = $('#tyyppi').val();
+                var malli = $('#malli').val();
+                var omistaja = $('#omistaja').val();
+                
 
 
                 $.ajax(
                     {
-                        url: "http://localhost:3003/updateUser",
+                        url: "http://localhost:3003/updateLaite",
                         method: 'post',  // Vaihtoehtoina get, post, delete, put (ainakin)
-                        data: { tunnus: tunnus, salasana: salasana, nimi: nimi, puhnro: puhnro, osoite: osoite } // json-muodossa data, joka halutaan lähettää serverille (sama kuin laittaisi url:n perään ?delay=1)
+                        data: { merkki: merkki, tyyppi: tyyppi, malli: malli, omistaja: omistaja } // json-muodossa data, joka halutaan lähettää serverille (sama kuin laittaisi url:n perään ?delay=1)
                     }).done(function (data, textStatus, jqXHR) {
 
                         // Suoritetaan kun kutsu on valmis
                         console.log("OK");
-                        window.location = "http://localhost:3003/etusivu";
+                        window.location = "http://localhost:3003/adminsivu";
 
                     }).fail(function (jqXHR, textStatus, errorThrown) {
                         // Suoriteaan, jos kutsu epäonnistuu
@@ -71,7 +71,7 @@
 
             $('#palaa').click(function () {
 
-                window.location = "http://localhost:3003/etusivu";
+                window.location = "http://localhost:3003/adminsivu";
 
             });
         });
@@ -79,26 +79,13 @@
     </script>
 </head>
 <body>
-
-    
-    <!--<nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar">
-        <div class="w3-container w3-display-container w3-padding-16">
-            <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
-            <h3 class="w3-wide"><b>LAITEREKISTERI</b></h3>
-        </div>
-
-
-
-
-
-    </nav>-->
     
 
 
 
     <nav class="Lohko2">
 
-        <input type="button" id="palaa" value="Palaa etusivulle" />
+        <input type="button" id="palaa" value="Palaa adminsivulle" />
         <input type="button" id="ulos" value="Kirjaudu ulos" />
 
         
@@ -107,28 +94,25 @@
 
     <form method="post" action="register.html" id="tiedot">
         <div class="input-group">
-            <label for="tunnus"> käyttäjätunnus: </label>
-            <input type="text" name="tunnus" id="tunnus" class="text ui-widget-content ui-corner-all">
+            <label for="tunnus"> Merkki: </label>
+            <input type="text" id="merkki" class="text ui-widget-content ui-corner-all">
         </div>
         <div class="input-group">
-            <label for="salasana"> salasana: </label>
-            <input type="password" name="salasana" id="salasana" class="text ui-widget-content ui-corner-all">
+            <label for="salasana"> Malli: </label>
+            <input type="text"  id="malli" class="text ui-widget-content ui-corner-all">
         </div>
         
 
         <div class="input-group">
-            <label for="nimi"> Uusi nimi: </label>
-            <input id="nimi" type="text">
+            <label for="nimi"> Uusi tyyppi: </label>
+            <input id="tyyppi" type="text">
         </div>
 
         <div class="input-group">
-            <label for="puhnro"> Uusi puhelinnumero: </label>
-            <input id="puhnro" type="text" class="text ui-widget-content ui-corner-all">
+            <label for="puhnro"> Uusi omistaja: </label>
+            <input id="omistaja" type="text" class="text ui-widget-content ui-corner-all">
         </div>
-        <div class="input-group">
-            <label for="osoite"> Uusi osoite: </label>
-            <input id="osoite" type="text" class="text ui-widget-content ui-corner-all">
-        </div>
+       
         <div>
             <button type="button" id="tallenna">Tallenna</button>
             
