@@ -28,7 +28,7 @@
                 var tunnus = $('#tunnus').val();
                 var salasana = $('#salasana').val();
                 
-
+                
 
                 $.ajax(
                     {
@@ -40,14 +40,26 @@
                         // Suoritetaan kun kutsu on valmis
                         console.log("OK");
                         //window.location = "http://localhost:3003/etusivu";
+                       
 
                         if (typeof data[0] != 'undefined') {
 
                             var tunnus = data[0]['tunnus']
                             var salasana = data[0]['salasana']
+                            var admin = data[0]['admin']
 
 
-                            if (tunnus == tunnus && salasana == salasana) {
+
+
+                            if (tunnus == salasana && salasana == salasana && admin.data == '1') {
+
+                                console.log("admin-kirjautuminen onnistui");
+                                window.location = "http://localhost:3003/adminsivu";
+
+
+                            }
+
+                            else if (tunnus == tunnus && salasana == salasana) {
 
                                 console.log("kirjautuminen onnistui");
                                 window.location = "http://localhost:3003/etusivu";
@@ -55,7 +67,8 @@
 
                             }
 
-                            if (tunnus == tunnus && salasana !== salasana) {
+
+                            else if (tunnus == tunnus && salasana !== salasana) {
 
                                 console.log("kirjautuminen epäonnistui, salasana ei täsmää");
                                 window.location = "http://localhost:3003";
