@@ -151,6 +151,22 @@ module.exports =
         })
     },
 
+    haeMuokattava: function (laite_id) {
+        return new Promise((resolve, reject) => {
+
+            connection.query('SELECT * FROM laite WHERE laite_id =?', [laite_id], function (error, results, fields) {
+                if (error) {
+                    console.log("Virhe haettaessa laitteita taulusta, syy: " + error);
+                    reject("Virhe haettaessa dataa laite-taulusta, syy: " + error);
+                }
+                else {
+                    console.log("Data (rev) = " + JSON.stringify(results));
+                    resolve(results);
+                }
+            })
+        })
+    },
+
     
 
     poistaLaite: function (laite_id) {

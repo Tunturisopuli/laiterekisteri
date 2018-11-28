@@ -54,6 +54,7 @@
                 window.location = "http://localhost:3003/laitemuokkaus";
 
             });
+            
 
             $('#taulu').on('click', '#delete', function () {
 
@@ -82,8 +83,18 @@
                 alert("olet muokkaamassa laitetta jonka id on = " + laite_id);
                 if (confirm("Muokataanko varmasti?")) {
 
-                    window.location = "http://localhost:3003/laitemuokkaus";
+                    
 
+                    $.ajax({
+                        url: "http://localhost:3003/haeMuokattava?haeMuokattava=" + laite_id,
+                        method: "GET",
+                        //data: { laite_id : laite_id },
+                        success: function (data) {
+
+                            window.location = "http://localhost:3003/laitemuokkaus";
+                            
+                        }
+                    });
                     setInterval(function () {
                         $('#alert_message').html('');
                     }, 5000);
@@ -143,7 +154,7 @@
 
     <nav class="Lohko2">
 
-        <input type="button" id="kayttaja" value="Käyttäjätili" />
+        
         <input type="button" id="ulos" value="Kirjaudu ulos" />
         <input type="button" id="uusi" value="Lisää uusi laite" />
         <input type="button" id="paivitalaite" value="Päivitä laitteen tiedot" />
@@ -222,45 +233,7 @@
                         { "defaultContent": '<button id="muokkaa">Muokkaa</button>' }
                     ],
 
-                    "language": {
-                        "sEmptyTable": "Ei näytettäviä tuloksia.",
-                        "sInfo": "Näytetään rivit _START_ - _END_ (yhteensä _TOTAL_ )",
-                        "sInfoEmpty": "Näytetään 0 - 0 (yhteensä 0)",
-                        "sInfoFiltered": "(suodatettu _MAX_ tuloksen joukosta)",
-                        "sInfoPostFix": "",
-                        "sInfoThousands": ",",
-                        "sLengthMenu": "Näytä kerralla _MENU_ riviä",
-                        "sLoadingRecords": "Ladataan...",
-                        "sProcessing": "Hetkinen...",
-                        "sSearch": "Etsi:",
-                        "sZeroRecords": "Tietoja ei löytynyt",
-                        "oPaginate": {
-                            "sFirst": "Ensimmäinen",
-                            "sLast": "Viimeinen",
-                            "sNext": "Seuraava",
-                            "sPrevious": "Edellinen"
-                        },
-                        "oAria": {
-                            "sSortAscending": ": A-Z",
-                            "sSortDescending": ": Z-A"
-                        },
-                        "select": {
-                            "rows": {
-                                "_": "Valittuna %d riviä",
-                                "0": "Klikkaa riviä valitaksesi sen",
-                                "1": "Valittuna vain yksi rivi"
-                            }
-                        },
-                        "buttons": {
-                            "copy": "Kopioi",
-                            "copySuccess": {
-                                "1": "Yksi rivi kopioitu leikepöydälle",
-                                "_": "%d riviä kopioitu leikepöydälle"
-                            },
-                            "copyTitle": "Kopioi leikepöydälle",
-                            "copyKeys": "Paina <i>ctrl</i> tai <i>\u2318</i> + <i>C</i> kopioidaksesi taulukon arvot<br> leikepöydälle. <br><br>Peruuttaaksesi klikkaa tähän tai Esc."
-                        },
-                    }
+                   
                 });
 
             }).fail(function (jqXHR, textStatus, errorThrown) {

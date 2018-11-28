@@ -113,6 +113,30 @@ app.get('/haeLaitteet', function (req, res) {
 
 
 });
+
+app.get('/haeMuokattava', function (req, res) {
+
+    //var tunnus = req.param('haeLaitteet');
+
+    customerController.haeMuokattava().then(function (data) {
+        console.log(JSON.stringify(data));
+        return data;
+    })
+        .then((types) => {
+            return types;
+        })
+        .catch(function (msg) {
+            console.log("Virhettä pukkaa " + msg);
+        })
+        .then((types) => {
+            // suoritetaan vaikka tulis virhe
+            if (types == null) types = [{ tunnus: null, salasana: null }];
+            res.send(types);
+
+        });
+
+
+});
     
 
 app.get('/', function(req, res) {
