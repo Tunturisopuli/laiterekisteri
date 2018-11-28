@@ -75,6 +75,27 @@
                     }, 5000);
                 }
             });
+
+            $('#taulu').on('click', '#muokkaa', function () {
+
+                var laite_id = $(this).closest('tr').find('td:eq(0)').text();
+                alert("olet muokkaamassa laitetta jonka id on = " + laite_id);
+                if (confirm("Muokataanko varmasti?")) {
+                    $.ajax({
+                        url: "http://localhost:3003/updateLaite?laite_id=" + laite_id,
+                        method: "GET",
+                        //data: { laite_id : laite_id },
+                        success: function (data) {
+
+                            window.location = "http://localhost:3003/laitemuokkaus";
+                            
+                        }
+                    });
+                    setInterval(function () {
+                        $('#alert_message').html('');
+                    }, 5000);
+                }
+            });
         });
 
     </script>
@@ -93,15 +114,31 @@
             <a onclick="tabletit()" class="w3-button w3-block w3-white w3-left-align" id="myBtn">
                 Tabletit <i class="fa fa-caret-down"></i>
             </a>
+            <a onclick="koneet()" class="w3-button w3-block w3-white w3-left-align" id="myBtn">
+                Pöytäkoneet <i class="fa fa-caret-down"></i>
+            </a>
+            <a onclick="puhelimet()" class="w3-button w3-block w3-white w3-left-align" id="myBtn">
+                Puhelimet <i class="fa fa-caret-down"></i>
+            </a>
             <div id="tabletit_div" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-                <a href="#" class="w3-bar-item w3-button">Skinny</a>
-                <a href="#" class="w3-bar-item w3-button">Relaxed</a>
-                <a href="#" class="w3-bar-item w3-button">Bootcut</a>
-                <a href="#" class="w3-bar-item w3-button">Straight</a>
+                <a href="#" class="w3-bar-item w3-button">Asus</a>
+                <a href="#" class="w3-bar-item w3-button">Apple</a>
+                <a href="#" class="w3-bar-item w3-button">Samsung</a>
+
             </div>
-            <a href="#" class="w3-bar-item w3-button">PERSEKOLO</a>
-            <a href="#" class="w3-bar-item w3-button">Läppärit</a>
-            <a href="#" class="w3-bar-item w3-button">Puhelimet</a>
+            <div id="koneet_div" class="w3-bar-block w3-hide w3-padding-large w3-medium">
+                <a href="#" class="w3-bar-item w3-button">Asus</a>
+                <a href="#" class="w3-bar-item w3-button">Acer</a>
+                <a href="#" class="w3-bar-item w3-button">Lenovo</a>
+
+            </div>
+            <div id="puhelimet_div" class="w3-bar-block w3-hide w3-padding-large w3-medium">
+                <a href="#" class="w3-bar-item w3-button">Huawei</a>
+                <a href="#" class="w3-bar-item w3-button">Apple</a>
+                <a href="#" class="w3-bar-item w3-button">Samsung</a>
+
+            </div>
+
         </div>
 
 
@@ -143,6 +180,15 @@
                             Omistaja
                         </th>
                         <th>
+                            Nimi
+                        </th>
+                        <th>
+                            Kuvaus
+                        </th>
+                        <th>
+
+                        </th>
+                        <th>
 
                         </th>
                     </tr>
@@ -177,7 +223,10 @@
                         { "data": "merkki" },
                         { "data": "malli" },
                         { "data": "omistaja" },
-                        { "defaultContent": '<button id="delete">Poista</button>' }
+                        { "data": "nimi" },
+                        { "data": "kuvaus" },
+                        { "defaultContent": '<button id="delete">Poista</button>' },
+                        { "defaultContent": '<button id="muokkaa">Muokkaa</button>' }
                     ],
 
                     "language": {

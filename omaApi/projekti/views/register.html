@@ -11,9 +11,16 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <script>
+
+        
+
         $(document).ready(function () {
 
+            
+
             $('#tallenna').click(function () {
+
+                
 
                 var tunnus = $('#tunnus').val();
                 var salasana = $('#salasana').val();
@@ -58,6 +65,17 @@
 
         });
 
+        var check = function () {
+            if (document.getElementById('salasana').value ==
+                document.getElementById('salasana_uusi').value) {
+                document.getElementById('message').style.color = 'green';
+                document.getElementById('message').innerHTML = 'Salasanan vahvistus onnistui';
+            } else {
+                document.getElementById('message').style.color = 'red';
+                document.getElementById('message').innerHTML = 'Salasanat eivät mätsää';
+            }
+        }
+
     </script>
 </head>
 <body>
@@ -70,11 +88,12 @@
         </div>
         <div class="input-group">
             <label for="salasana"> Salasana: </label>
-            <input type="password" name="salasana" id="salasana" class="text ui-widget-content ui-corner-all">
+            <input type="password" name="salasana" id="salasana"  onkeyup='check();' class="text ui-widget-content ui-corner-all">
         </div>
         <div class="input-group">
             <label for="salasana_uusi"> Salasana uudelleen: </label>
-            <input type="password" name="salasana_uusi" id="salasana_uusi" class="text ui-widget-content ui-corner-all">
+            <input type="password" name="salasana_uusi" id="salasana_uusi" onkeyup='check();' class="text ui-widget-content ui-corner-all">
+            <span id='message'></span>
         </div>
         <div class="input-group">
             <label id="nimimerkkierror" value=""> </label>
@@ -99,8 +118,12 @@
             <button type="button" id="peruuta">Peruuta</button>
         </div>
 
+
+
         
     </form>
+
+
 
 </body>
 </html>
