@@ -28,6 +28,16 @@ app.use(function (req, res, next) {
 app.route('/createUser')
     .post(customerController.createUser);
 
+app.route('/uusiLaite')
+    .post(customerController.uusiLaite);
+
+app.route('/updateUser')
+    .post(customerController.updateUser);
+
+app.route('/updateLaite')
+    .post(customerController.updateLaite);
+
+
 app.get('/checkUser', function (req, res) {
 
     var tunnus = req.param('checkUser');
@@ -51,6 +61,58 @@ app.get('/checkUser', function (req, res) {
 
 
 });
+
+
+
+app.get('/poistaLaite', function (req, res) {
+
+    var laite_id = req.param('laite_id');
+
+    customerController.poistaLaite(laite_id).then(function (data) {
+        console.log(JSON.stringify(data));
+        return data;
+    })
+        .then((types) => {
+            return types;
+        })
+        .catch(function (msg) {
+            console.log("Virhettä pukkaa " + msg);
+        })
+        .then((types) => {
+            // suoritetaan vaikka tulis virhe
+            if (types == null) types = [{ tunnus: null, salasana: null }];
+            res.send(types);
+
+        });
+
+
+});
+
+
+
+app.get('/haeLaitteet', function (req, res) {
+
+    //var tunnus = req.param('haeLaitteet');
+
+    customerController.haeLaitteet().then(function (data) {
+        console.log(JSON.stringify(data));
+        return data;
+    })
+        .then((types) => {
+            return types;
+        })
+        .catch(function (msg) {
+            console.log("Virhettä pukkaa " + msg);
+        })
+        .then((types) => {
+            // suoritetaan vaikka tulis virhe
+            if (types == null) types = [{ tunnus: null, salasana: null }];
+            res.send(types);
+
+        });
+
+
+});
     
 
 app.get('/', function(req, res) {
@@ -66,6 +128,28 @@ app.get('/register', function (req, res) {
 
 app.get('/etusivu', function (req, res) {
     res.render('pääsivu', {
+
+    });
+});
+
+app.get('/adminsivu', function (req, res) {
+    res.render('adminsivu', {
+
+    });
+});
+
+app.get('/muokkaus', function (req, res) {
+    res.render('muokkaus', {
+
+    });
+});
+app.get('/uusilaite', function (req, res) {
+    res.render('uusilaite', {
+
+    });
+});
+app.get('/laitemuokkaus', function (req, res) {
+    res.render('laitemuokkaus', {
 
     });
 });

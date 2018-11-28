@@ -81,16 +81,9 @@
                 var laite_id = $(this).closest('tr').find('td:eq(0)').text();
                 alert("olet muokkaamassa laitetta jonka id on = " + laite_id);
                 if (confirm("Muokataanko varmasti?")) {
-                    $.ajax({
-                        url: "http://localhost:3003/updateLaite?laite_id=" + laite_id,
-                        method: "GET",
-                        //data: { laite_id : laite_id },
-                        success: function (data) {
 
-                            window.location = "http://localhost:3003/laitemuokkaus";
-                            
-                        }
-                    });
+                    window.location = "http://localhost:3003/laitemuokkaus";
+
                     setInterval(function () {
                         $('#alert_message').html('');
                     }, 5000);
