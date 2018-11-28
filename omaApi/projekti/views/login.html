@@ -26,7 +26,7 @@
             $('#login').click(function () {
 
                 var tunnus = $('#tunnus').val();
-                var salasana = $('#salasana').val();
+                var password = $('#password').val();
                 
                 
 
@@ -51,7 +51,7 @@
 
 
 
-                            if (tunnus == salasana && salasana == salasana && admin.data == '1') {
+                            if (tunnus == tunnus && password == salasana && admin.data == '1') {
 
                                 console.log("admin-kirjautuminen onnistui");
                                 window.location = "http://localhost:3003/adminsivu";
@@ -59,7 +59,7 @@
 
                             }
 
-                            else if (tunnus == tunnus && salasana == salasana) {
+                            else if (tunnus == tunnus && password == salasana) {
 
                                 console.log("kirjautuminen onnistui");
                                 window.location = "http://localhost:3003/etusivu";
@@ -68,7 +68,7 @@
                             }
 
 
-                            else if (tunnus == tunnus && salasana !== salasana) {
+                            else if (tunnus == tunnus && password !== salasana) {
 
                                 console.log("kirjautuminen epäonnistui, salasana ei täsmää");
                                 window.location = "http://localhost:3003";
@@ -125,7 +125,7 @@
                 <label for="kayttaja"> Käyttäjätunnus</label>
                 <input type="text" id="tunnus">
                 <label for="salasana"> Salasana</label>
-                <input type="password" id="salasana">
+                <input type="password" id="password">
 
                 <button type="button" id="login">Kirjaudu</button>
                 <button type="button" id="register">Rekisteröidy</button>
