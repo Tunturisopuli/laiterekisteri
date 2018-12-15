@@ -89,12 +89,62 @@ app.get('/poistaLaite', function (req, res) {
 });
 
 
+app.get('/poistaVaraus', function (req, res) {
+
+    var varaus_id = req.param('varaus_id');
+
+    customerController.poistaVaraus(varaus_id).then(function (data) {
+        console.log(JSON.stringify(data));
+        return data;
+    })
+        .then((types) => {
+            return types;
+        })
+        .catch(function (msg) {
+            console.log("Virhettä pukkaa " + msg);
+        })
+        .then((types) => {
+            // suoritetaan vaikka tulis virhe
+            if (types == null) types = [{ tunnus: null, salasana: null }];
+            res.send(types);
+
+        });
+
+
+});
+
+
 
 app.get('/haeLaitteet', function (req, res) {
 
     //var tunnus = req.param('haeLaitteet');
 
     customerController.haeLaitteet().then(function (data) {
+        console.log(JSON.stringify(data));
+        return data;
+    })
+        .then((types) => {
+            return types;
+        })
+        .catch(function (msg) {
+            console.log("Virhettä pukkaa " + msg);
+        })
+        .then((types) => {
+            // suoritetaan vaikka tulis virhe
+            if (types == null) types = [{ tunnus: null, salasana: null }];
+            res.send(types);
+
+        });
+
+
+});
+
+
+app.get('/haeVaraukset', function (req, res) {
+
+    //var tunnus = req.param('haeLaitteet');
+
+    customerController.haeVaraukset().then(function (data) {
         console.log(JSON.stringify(data));
         return data;
     })
@@ -174,6 +224,11 @@ app.get('/uusilaite', function (req, res) {
 });
 app.get('/laitemuokkaus', function (req, res) {
     res.render('laitemuokkaus', {
+
+    });
+});
+app.get('/varaukset', function (req, res) {
+    res.render('varaukset', {
 
     });
 });

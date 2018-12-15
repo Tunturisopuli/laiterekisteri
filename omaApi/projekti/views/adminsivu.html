@@ -54,6 +54,11 @@
                 window.location = "http://localhost:3003/laitemuokkaus";
 
             });
+            $('#varaukset').click(function () {
+
+                window.location = "http://localhost:3003/varaukset";
+
+            });
             
 
             $('#taulu').on('click', '#delete', function () {
@@ -154,9 +159,10 @@
 
     <nav class="Lohko2">
 
-        
+
         <input type="button" id="ulos" value="Kirjaudu ulos" />
         <input type="button" id="uusi" value="Lisää uusi laite" />
+        <input type="button" id="varaukset" value="Varaushallinta" />
         <input type="button" id="paivitalaite" value="Päivitä laitteen tiedot" />
 
 

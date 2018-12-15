@@ -151,6 +151,22 @@ module.exports =
         })
     },
 
+    haeVaraukset: function (req, res) {
+        return new Promise((resolve, reject) => {
+
+            connection.query('SELECT * FROM varaus', function (error, results, fields) {
+                if (error) {
+                    console.log("Virhe haettaessa laitteita taulusta, syy: " + error);
+                    reject("Virhe haettaessa dataa laite-taulusta, syy: " + error);
+                }
+                else {
+                    console.log("Data (rev) = " + JSON.stringify(results));
+                    resolve(results);
+                }
+            })
+        })
+    },
+
     haeMuokattava: function (laite_id) {
         return new Promise((resolve, reject) => {
 
@@ -176,6 +192,23 @@ module.exports =
                 if (error) {
                     console.log("Virhe haettaessa käyttäjätunnusta taulusta, syy: " + error);
                     reject("Virhe haettaessa dataa kayttaja-taulusta, syy: " + error);
+                }
+                else {
+                    console.log("Data (rev) = " + JSON.stringify(results));
+                    resolve(results);
+                }
+            })
+        })
+    },
+
+
+    poistaVaraus: function (varaus_id) {
+        return new Promise((resolve, reject) => {
+
+            connection.query('DELETE FROM varaus WHERE varaus_id =?', [varaus_id], function (error, results, fields) {
+                if (error) {
+                    console.log("Virhe haettaessa varausta taulusta, syy: " + error);
+                    reject("Virhe haettaessa dataa varaus-taulusta, syy: " + error);
                 }
                 else {
                     console.log("Data (rev) = " + JSON.stringify(results));
