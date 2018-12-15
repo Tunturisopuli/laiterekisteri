@@ -49,11 +49,6 @@
                 window.location = "http://localhost:3003/uusilaite";
 
             });
-            $('#paivitalaite').click(function () {
-
-                window.location = "http://localhost:3003/laitemuokkaus";
-
-            });
             $('#varaukset').click(function () {
 
                 window.location = "http://localhost:3003/varaukset";
@@ -88,21 +83,47 @@
                 alert("olet muokkaamassa laitetta jonka id on = " + laite_id);
                 if (confirm("Muokataanko varmasti?")) {
 
-                    
-
                     $.ajax({
-                        url: "http://localhost:3003/haeMuokattava?haeMuokattava=" + laite_id,
-                        method: "GET",
-                        //data: { laite_id : laite_id },
-                        success: function (data) {
+                        url: "http://localhost:3003/haeMuokattava?laite_id=" + laite_id,
+                        method: 'GET',
+                        "dataType": "json",
+                        //data: { laite_id: id }
+                    }).done(function (data, textStatus, jqXHR) {
 
-                            window.location = "http://localhost:3003/laitemuokkaus";
+                        
+
+                        $('#merkki').val(data[0]['merkki']);
+                        $('#malli').val(data[0]['malli']);
+                        $('#tyyppi').val(data[0]['tyyppi_id']);
+                        $('#omistaja').val(data[0]['omistaja']);
+                        $('#nimi').val(data[0]['nimi']);
+                        $('#kuvaus').val(data[0]['kuvaus']);
+
+                        window.location = "http://localhost:3003/laitemuokkaus";
+
+                    }).fail(function (jqXHR, textStatus, errorThrown) {
+                        console.log("Kutsu epäonnistui");
+                    }).always(function (jqXHR, textStatus, errorThrown) {
+                        console.log("meow");
+                        });
+
+
+
+
+
+                    //$.ajax({
+                    //    url: "http://localhost:3003/haeMuokattava?haeMuokattava=" + laite_id,
+                    //    method: "GET",
+                    //    //data: { laite_id : laite_id },
+                    //    success: function (data) {
+
+                    //        window.location = "http://localhost:3003/laitemuokkaus";
                             
-                        }
-                    });
-                    setInterval(function () {
-                        $('#alert_message').html('');
-                    }, 5000);
+                    //    }
+                    //});
+                    //setInterval(function () {
+                    //    $('#alert_message').html('');
+                    //}, 5000);
                 }
             });
         });
@@ -163,7 +184,6 @@
         <input type="button" id="ulos" value="Kirjaudu ulos" />
         <input type="button" id="uusi" value="Lisää uusi laite" />
         <input type="button" id="varaukset" value="Varaushallinta" />
-        <input type="button" id="paivitalaite" value="Päivitä laitteen tiedot" />
 
 
 

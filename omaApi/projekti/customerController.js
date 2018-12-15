@@ -168,7 +168,9 @@ module.exports =
     },
 
     haeMuokattava: function (laite_id) {
+
         return new Promise((resolve, reject) => {
+            console.log(laite_id);
 
             connection.query('SELECT * FROM laite WHERE laite_id =?', [laite_id], function (error, results, fields) {
                 if (error) {

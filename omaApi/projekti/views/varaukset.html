@@ -17,8 +17,23 @@
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
 
+    <style>
+
+
+        .Lohko2 {
+            font-size: large;
+            text-align: right;
+        }
+    </style>
+
 </head>
 <body>
+
+    <nav class="Lohko2">
+
+        <input type="button" id="palaa" value="Palaa adminsivulle" />
+
+    </nav>
 
     <div>
         <table id="taulu" name="taulu" class="table table-bordered" style="width:60%" align="center">
@@ -28,7 +43,7 @@
                         ID
                     </th>
                     <th>
-                        Käyttäjä
+                        Käyttäjä ID
                     </th>
                     <th>
                         Laite ID
@@ -98,7 +113,7 @@
 
             }).always(function (jqXHR, textStatus, errorThrown) {
                 console.log("meow");
-                });
+            });
 
 
 
@@ -122,6 +137,12 @@
                         $('#alert_message').html('');
                     }, 5000);
                 }
+            });
+
+            $('#palaa').click(function () {
+
+                window.location = "http://localhost:3003/adminsivu";
+
             });
 
         }

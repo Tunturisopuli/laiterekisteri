@@ -166,9 +166,9 @@ app.get('/haeVaraukset', function (req, res) {
 
 app.get('/haeMuokattava', function (req, res) {
 
-    //var tunnus = req.param('haeLaitteet');
+    var laite_id = req.param('laite_id');
 
-    customerController.haeMuokattava().then(function (data) {
+    customerController.haeMuokattava(laite_id).then(function (data) {
         console.log(JSON.stringify(data));
         return data;
     })
