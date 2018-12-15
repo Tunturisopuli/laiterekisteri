@@ -90,8 +90,9 @@
 
         <input type="button" id="muokkaa" value="Muokkaa käyttäjätietoja" />
         <input type="button" id="ulos" value="Kirjaudu ulos" />
+        <input type="button" id="tiedot" value="Omat varaukset/lainaukset" />
 
-        
+
 
     </nav>
 
@@ -116,10 +117,16 @@
                             Omistaja
                         </th>
                         <th>
-                            nimi
+                            Nimi
                         </th>
                         <th>
-                            kuvaus
+                            Kuvaus
+                        </th>
+                        <th>
+
+                        </th>
+                        <th>
+                            
                         </th>
                     </tr>
                 </thead>
@@ -155,6 +162,8 @@
                         { "data": "omistaja" },
                         { "data": "nimi" },
                         { "data": "kuvaus" },
+                        { "defaultContent": '<button id="varaa">Varaa</button>' },
+                        { "defaultContent": '<button id="lainaa">Lainaa</button>' }
                     ],
 
                    
