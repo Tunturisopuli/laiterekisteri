@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
 
 
@@ -39,9 +39,22 @@
     <script>
         $(document).ready(function () {
 
+            var keksi;
+
+            if (!!$.cookie('user')) {
+                keksi = $.cookie('user');
+                console.log("Suklaamuffinssi löytyi: " + keksi);
+            }
+            else {
+                console.log("Vooi vitttttu");
+            }
+
+
             $('#ulos').click(function () {
 
                 window.location = "http://localhost:3003";
+                $.removeCookie('user', { path: '/' });
+                $.removeCookie('password', { path: '/' });
 
             });
 
@@ -50,41 +63,19 @@
                 window.location = "http://localhost:3003/muokkaus";
 
             });
+
+            $('#taulu').on('click', '#varaa', function () {
+
+                var laite_id = $(this).closest('tr').find('td:eq(0)').text();
+                $.cookie('laite_id', laite_id);
+                window.location = "http://localhost:3003/varaalaite";
+
+            });
         });
 
     </script>
 </head>
 <body>
-
-
-    <nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:270px" id="mySidebar">
-        <div class="w3-container w3-display-container w3-padding-16">
-            <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
-            <h3 class="w3-wide"><b>LAITEREKISTERI</b></h3>
-        </div>
-
-        <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
-            <a href="#" class="w3-bar-item w3-button">Shirts</a>
-            <a onclick="tabletit()" class="w3-button w3-block w3-white w3-left-align" id="myBtn">
-                Tabletit <i class="fa fa-caret-down"></i>
-            </a>
-            <div id="tabletit_div" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-                <a href="#" class="w3-bar-item w3-button">Skinny</a>
-                <a href="#" class="w3-bar-item w3-button">Relaxed</a>
-                <a href="#" class="w3-bar-item w3-button">Bootcut</a>
-                <a href="#" class="w3-bar-item w3-button">Straight</a>
-            </div>
-            <a href="#" class="w3-bar-item w3-button">PERSEKOLO</a>
-            <a href="#" class="w3-bar-item w3-button">Läppärit</a>
-            <a href="#" class="w3-bar-item w3-button">Puhelimet</a>
-        </div>
-
-
-
-    </nav>
-
-
-
 
     <nav class="Lohko2">
 
@@ -125,9 +116,6 @@
                         <th>
 
                         </th>
-                        <th>
-                            
-                        </th>
                     </tr>
                 </thead>
             </table>
@@ -136,6 +124,15 @@
 
 
     <script type="text/javascript" language="javascript">
+
+        $(document).ready(function () {
+
+            $('#tiedot').click(function () {
+
+                window.location = "http://localhost:3003/varaukset";
+
+            });
+
 
             HaeData();
 
@@ -163,7 +160,6 @@
                         { "data": "nimi" },
                         { "data": "kuvaus" },
                         { "defaultContent": '<button id="varaa">Varaa</button>' },
-                        { "defaultContent": '<button id="lainaa">Lainaa</button>' }
                     ],
 
                    
@@ -193,6 +189,7 @@
         document.getElementById("myBtn").click();
 
 
+        });
     </script>
 
 

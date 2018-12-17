@@ -151,10 +151,26 @@ module.exports =
         })
     },
 
-    haeVaraukset: function (req, res) {
+    haeVaraukset: function (muuttuja) {
         return new Promise((resolve, reject) => {
 
-            connection.query('SELECT * FROM varaus', function (error, results, fields) {
+            connection.query('SELECT v.varaus_id, v.status, v.lainauspvm, v.palautuspvm, k.tunnus, l.laite_id, l.merkki, l.malli FROM varaus AS v INNER JOIN kayttaja AS k ON v.kayttaja_id = k.avain INNER JOIN laite AS l ON v.laite_id = l.laite_id WHERE k.tunnus = ?', [muuttuja] , function (error, results, fields) {
+                if (error) {
+                    console.log("Virhe haettaessa laitteita taulusta, syy: " + error);
+                    reject("Virhe haettaessa dataa laite-taulusta, syy: " + error);
+                }
+                else {
+                    console.log("Data (rev) = " + JSON.stringify(results));
+                    resolve(results);
+                }
+            })
+        })
+    },
+
+    haeKaikkiVaraukset: function (req, res) {
+        return new Promise((resolve, reject) => {
+
+            connection.query('SELECT v.varaus_id, v.status, v.lainauspvm, v.palautuspvm, k.tunnus, l.laite_id, l.merkki, l.malli FROM varaus AS v INNER JOIN kayttaja AS k ON v.kayttaja_id = k.avain INNER JOIN laite AS l ON v.laite_id = l.laite_id WHERE 1' , function (error, results, fields) {
                 if (error) {
                     console.log("Virhe haettaessa laitteita taulusta, syy: " + error);
                     reject("Virhe haettaessa dataa laite-taulusta, syy: " + error);

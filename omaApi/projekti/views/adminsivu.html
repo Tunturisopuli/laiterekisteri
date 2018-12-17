@@ -39,9 +39,22 @@
     <script>
         $(document).ready(function () {
 
+            var keksi;
+
+            if (!!$.cookie('user')) {
+                keksi = $.cookie('user');
+                console.log("Suklaamuffinssi löytyi: " + keksi);
+            }
+            else {
+                console.log("Vooi vittttttu");
+            }
+
+
             $('#ulos').click(function () {
 
                 window.location = "http://localhost:3003";
+                $.removeCookie('user', { path: '/' });
+                $.removeCookie('password', { path: '/' });
 
             });
             $('#uusi').click(function () {
@@ -51,7 +64,7 @@
             });
             $('#varaukset').click(function () {
 
-                window.location = "http://localhost:3003/varaukset";
+                window.location = "http://localhost:3003/avaraukset";
 
             });
             

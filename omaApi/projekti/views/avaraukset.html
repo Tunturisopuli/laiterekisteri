@@ -31,7 +31,7 @@
 
     <nav class="Lohko2">
 
-        <input type="button" id="palaa" value="Palaa etusivulle" />
+        <input type="button" id="palaa" value="Palaa adminsivulle" />
 
     </nav>
 
@@ -82,18 +82,15 @@
         HaeData();
 
         var data;
-        var muuttuja;
 
 
         function HaeData() {
 
-            muuttuja = $.cookie('user');
 
             $.ajax({
-                url: "http://localhost:3003/haeVaraukset",
+                url: "http://localhost:3003/haeKaikkiVaraukset",
                 method: 'GET',
-                "dataType": "json",
-                data: { muuttuja }
+                "dataType": "json"
             }).done(function (data, textStatus, jqXHR) {
 
                 editor = $('#taulu').DataTable({
@@ -128,7 +125,7 @@
             $('#taulu').on('click', '#delete', function () {
 
                 var varaus_id = $(this).closest('tr').find('td:eq(0)').text();
-                alert("Olet poistamassa varausta jonka ID on = " + varaus_id);
+                alert("olet poistamassa varausta jonka id on = " + varaus_id);
                 if (confirm("Poistetaanko varmasti?")) {
                     $.ajax({
                         url: "http://localhost:3003/poistaVaraus?varaus_id=" + varaus_id,
@@ -148,7 +145,7 @@
 
             $('#palaa').click(function () {
 
-                window.location = "http://localhost:3003/etusivu";
+                window.location = "http://localhost:3003/adminsivu";
 
             });
 
